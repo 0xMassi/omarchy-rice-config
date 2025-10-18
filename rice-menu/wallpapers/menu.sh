@@ -7,14 +7,15 @@ THEME_BG_DIR="$HOME/.config/omarchy/current/theme/backgrounds"
 OPTIONS="Browse Theme Backgrounds
 Browse Custom Folder
 Set Custom Wallpaper
-Download from Unsplash
+Generate Theme from Wallpaper
 Add to Current Theme
 Random Theme Background
+Rotate Current Wallpaper
 Solid Color Background
 Current: $(basename "$CURRENT_BG")
 Back to Main Menu"
 
-selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Wallpapers: " --lines=8)
+selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Wallpapers: " --lines=9)
 
 case "$selected" in
     *"Browse Theme Backgrounds"*)
@@ -82,42 +83,42 @@ case "$selected" in
             fi
         fi
         ;;
-    *"Download from Unsplash"*)
-        CATEGORIES=" Nature
- Space
- Architecture
- Animals
- Technology
- Abstract
- Minimalist
- Dark
- Random"
-        
-        CATEGORY=$(echo "$CATEGORIES" | fuzzel --dmenu --prompt=" Select Category: ")
-        
-        if [ -n "$CATEGORY" ]; then
-            CATEGORY_CLEAN=$(echo "$CATEGORY" | xargs | tr '[:upper:]' '[:lower:]')
-            OUTPUT_FILE="/tmp/unsplash-$CATEGORY_CLEAN-$(date +%s).jpg"
-            
-            notify-send "Downloading" "Fetching wallpaper from Unsplash..."
-            curl -L "https://source.unsplash.com/1920x1080/?$CATEGORY_CLEAN" -o "$OUTPUT_FILE"
-            
-            if [ -f "$OUTPUT_FILE" ]; then
-                # Update symlink
-                ln -sf "$OUTPUT_FILE" ~/.config/omarchy/current/background
-                
-                # Set wallpaper
-                pkill swaybg
-                swaybg -i "$OUTPUT_FILE" -m fill &
-                
-                notify-send "Downloaded" "Wallpaper set from Unsplash"
-                
-                # Ask if user wants to save permanently
-                SAVE=$(echo -e "Yes\nNo" | fuzzel --dmenu --prompt=" Save to theme backgrounds? ")
-                if [ "$SAVE" = "Yes" ]; then
-                    mkdir -p "$THEME_BG_DIR"
-                    cp "$OUTPUT_FILE" "$THEME_BG_DIR/unsplash-$CATEGORY_CLEAN-$(date +%s).jpg"
-                    notify-send "Saved" "Added to theme backgrounds"
+    *"Generate Theme from Wallpaper"*)
+        # Find images in common directories
+        IMAGES=$(fd -t f -e jpg -e jpeg -e png -e webp . "$HOME/Pictures" "$HOME/Downloads" 2>/dev/null | head -20 | sed 's/^/ /')
+
+        if [ -z "$IMAGES" ]; then
+            notify-send "No Images" "No images found in Pictures or Downloads"
+        else
+            SELECTED=$(echo "$IMAGES" | fuzzel --dmenu --prompt=" Select Wallpaper: ")
+
+            if [ -n "$SELECTED" ]; then
+                IMG_PATH=$(echo "$SELECTED" | xargs)
+
+                # Ask for theme name
+                THEME_NAME=$(echo "" | fuzzel --dmenu --prompt=" Theme Name: ")
+
+                if [ -z "$THEME_NAME" ]; then
+                    THEME_NAME="wallpaper-$(basename "$IMG_PATH" | sed 's/\.[^.]*$//' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+                fi
+
+                # Generate theme
+                notify-send "Generating Theme" "Extracting colors from wallpaper..."
+
+                if ~/.config/rice-menu/wallpapers/generate-from-wallpaper.sh "$IMG_PATH" "$THEME_NAME"; then
+                    notify-send "Theme Created" "Activating $THEME_NAME..."
+
+                    # Create symlink if needed (generator uses ~/.local/share, setter uses ~/.config)
+                    if [ ! -e ~/.config/omarchy/themes/"$THEME_NAME" ]; then
+                        ln -sf ~/.local/share/omarchy/themes/"$THEME_NAME" ~/.config/omarchy/themes/"$THEME_NAME"
+                    fi
+
+                    # Activate the new theme
+                    omarchy-theme-set "$THEME_NAME"
+
+                    notify-send "Complete" "Theme generated and activated!"
+                else
+                    notify-send "Error" "Failed to generate theme. Make sure pywal is installed: pip3 install --user pywal"
                 fi
             fi
         fi
@@ -142,7 +143,7 @@ case "$selected" in
     *"Random Theme Background"*)
         if [ -d "$THEME_BG_DIR" ]; then
             RANDOM_BG=$(ls -1 "$THEME_BG_DIR"/*.{png,jpg,jpeg} 2>/dev/null | shuf -n 1)
-            
+
             if [ -n "$RANDOM_BG" ]; then
                 ln -sf "$RANDOM_BG" ~/.config/omarchy/current/background
                 pkill swaybg
@@ -151,6 +152,52 @@ case "$selected" in
             else
                 notify-send "No Backgrounds" "No backgrounds in theme"
             fi
+        fi
+        ;;
+    *"Rotate Current Wallpaper"*)
+        if [ -f "$CURRENT_BG" ]; then
+            ROTATION_OPTIONS=" 90° Clockwise
+ 180°
+ 90° Counter-clockwise
+ Flip Horizontal
+ Flip Vertical"
+
+            ROTATION=$(echo "$ROTATION_OPTIONS" | fuzzel --dmenu --prompt=" Rotate: ")
+
+            if [ -n "$ROTATION" ]; then
+                ROTATED_FILE="${CURRENT_BG%.*}-rotated.${CURRENT_BG##*.}"
+
+                case "$ROTATION" in
+                    *"90° Clockwise"*)
+                        magick "$CURRENT_BG" -rotate 90 -quality 100 "$ROTATED_FILE"
+                        ;;
+                    *"180°"*)
+                        magick "$CURRENT_BG" -rotate 180 -quality 100 "$ROTATED_FILE"
+                        ;;
+                    *"90° Counter-clockwise"*)
+                        magick "$CURRENT_BG" -rotate 270 -quality 100 "$ROTATED_FILE"
+                        ;;
+                    *"Flip Horizontal"*)
+                        magick "$CURRENT_BG" -flop -quality 100 "$ROTATED_FILE"
+                        ;;
+                    *"Flip Vertical"*)
+                        magick "$CURRENT_BG" -flip -quality 100 "$ROTATED_FILE"
+                        ;;
+                esac
+
+                if [ -f "$ROTATED_FILE" ]; then
+                    # Replace original with rotated version
+                    mv "$ROTATED_FILE" "$CURRENT_BG"
+
+                    # Reload wallpaper
+                    pkill swaybg
+                    swaybg -i "$CURRENT_BG" -m fill &
+
+                    notify-send "Wallpaper Rotated" "Applied rotation: $ROTATION"
+                fi
+            fi
+        else
+            notify-send "No Wallpaper" "No current wallpaper set"
         fi
         ;;
     *"Solid Color Background"*)

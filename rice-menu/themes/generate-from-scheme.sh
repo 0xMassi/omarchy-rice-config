@@ -100,6 +100,15 @@ echo "→ Generating waybar.css"
 cat > "$OUTPUT_DIR/waybar.css" << EOF
 @define-color foreground $FG_COLOR;
 @define-color background $BG_COLOR;
+@define-color accent $ACCENT_COLOR;
+EOF
+
+# Generate swaync.css
+echo "→ Generating swaync.css"
+cat > "$OUTPUT_DIR/swaync.css" << EOF
+@define-color foreground $FG_COLOR;
+@define-color background $BG_COLOR;
+@define-color accent $ACCENT_COLOR;
 EOF
 
 # Generate hyprland.conf

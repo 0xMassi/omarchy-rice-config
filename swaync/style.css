@@ -1,0 +1,226 @@
+@import "../omarchy/current/theme/swaync.css";
+
+* {
+  font-family: Adwaita Mono;
+  font-size: 13px;
+}
+
+.notification-row {
+  outline: none;
+  background: none;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: alpha(@accent, 0.1);
+}
+
+.notification-row .notification-background {
+  padding: 6px 12px;
+}
+
+.notification-row .notification-background .notification,
+.notification {
+  border-radius: 12px;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  background: @background;
+  border: 2px solid alpha(@accent, 0.3);
+}
+
+.notification-content {
+  background: transparent;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.close-button {
+  background: alpha(@accent, 0.2);
+  color: @foreground;
+  text-shadow: none;
+  padding: 0;
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-right: 12px;
+  box-shadow: none;
+  border: none;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.close-button:hover {
+  box-shadow: none;
+  background: @accent;
+  color: @background;
+  transition: all 0.15s ease-in-out;
+  border: none;
+}
+
+.close-button:active {
+  background: @accent;
+  color: @background;
+}
+
+.notification-default-action,
+.notification-action {
+  padding: 8px;
+  margin: 0;
+  box-shadow: none;
+  background: alpha(@accent, 0.1);
+  border: 1px solid alpha(@accent, 0.3);
+  color: @foreground;
+  transition: all 0.15s ease-in-out;
+  border-radius: 8px;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  box-shadow: none;
+  background: alpha(@accent, 0.2);
+  color: @accent;
+  border: 1px solid @accent;
+}
+
+.notification-default-action:active,
+.notification-action:active {
+  box-shadow: none;
+  background: @accent;
+  color: @background;
+}
+
+.summary {
+  font-size: 14px;
+  font-weight: bold;
+  background: transparent;
+  color: @foreground;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 11px;
+  font-weight: normal;
+  background: transparent;
+  color: alpha(@foreground, 0.7);
+  text-shadow: none;
+}
+
+.body {
+  font-size: 12px;
+  font-weight: normal;
+  background: transparent;
+  color: alpha(@foreground, 0.9);
+  text-shadow: none;
+}
+
+.control-center {
+  background: alpha(@background, 0.95);
+  color: @foreground;
+  border: 2px solid alpha(@accent, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  opacity: 0.5;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+.blank-window {
+  background: alpha(black, 0.25);
+}
+
+.widget-title {
+  margin: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: @foreground;
+}
+
+.widget-title > button {
+  font-size: 14px;
+  color: @foreground;
+  text-shadow: none;
+  background: alpha(@accent, 0.2);
+  border: 1px solid alpha(@accent, 0.3);
+  box-shadow: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.widget-title > button:hover {
+  background: alpha(@accent, 0.3);
+  color: @accent;
+  border-color: @accent;
+}
+
+.widget-title > button:active {
+  background: @accent;
+  color: @background;
+}
+
+.widget-dnd {
+  margin: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: @foreground;
+}
+
+.widget-dnd > switch {
+  font-size: 14px;
+  background: alpha(@accent, 0.2);
+  border: 1px solid alpha(@accent, 0.3);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.widget-dnd > switch:checked {
+  background: @accent;
+  border-color: @accent;
+}
+
+.widget-dnd > switch slider {
+  background: @foreground;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.widget-label {
+  margin: 8px 12px;
+}
+
+.widget-label > label {
+  font-size: 14px;
+  color: @foreground;
+}
+
+.widget-mpris {
+  color: @foreground;
+  background: alpha(@background, 0.8);
+}
+
+.widget-mpris-player {
+  padding: 8px 12px;
+  margin: 8px 12px;
+  background: alpha(@accent, 0.1);
+  border: 1px solid alpha(@accent, 0.3);
+  border-radius: 12px;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: @foreground;
+}
+
+.widget-mpris-subtitle {
+  font-size: 12px;
+  color: alpha(@foreground, 0.7);
+}
