@@ -168,38 +168,13 @@ Press **Super+R** to open the Rice Control Center.
 - fd (file finder)
 - Any Nerd Font
 
-## Changelog
-
-### Version 0.1.1 (2025-10-18)
+## What's New in v0.1.1
 
 **Bug Fixes:**
-- Fixed btop theme not updating when switching themes - theme generator now creates btop.theme files
-- All generated themes now include proper btop color schemes
+- Fixed btop theme not updating when switching themes
+- Theme generator now creates btop.theme files automatically
 
-### Version 0.1.0 (2025-10-18)
-
-**Font Manager:**
-- Complete system-wide font management
-- Updates all UI components simultaneously
-- Font favorites system
-- Google Fonts integration
-- Terminal font selection
-
-**Wallpaper Manager:**
-- Visual folder browser for image selection
-- Unsplash integration with categories
-- Solid color backgrounds with color picker
-- Add custom images to current theme
-
-**Improved Menus:**
-- Removed emoji clutter from menu options
-- Simplified favorites management
-- Better navigation and organization
-
-**Waybar Integration:**
-- Working module toggle functionality
-- Automatic reload after changes
-- Module state persistence
+[View Full Changelog](CHANGELOG.md)
 
 ## Versioning
 
