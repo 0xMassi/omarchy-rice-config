@@ -1,0 +1,33 @@
+# Omarchy Themes Catalog
+# Format: Theme Name | Type | Source | Description
+
+# Built-in Omarchy Themes (Pre-installed)
+Catppuccin|builtin|installed|Pastel mocha color scheme
+Catppuccin Latte|builtin|installed|Light pastel variant
+Nord|builtin|installed|Arctic north-bluish palette
+Tokyo Night|builtin|installed|Dark night theme
+Gruvbox|builtin|installed|Retro groove colors
+Rose Pine|builtin|installed|Natural pine theme
+Everforest|builtin|installed|Green forest scheme
+Kanagawa|builtin|installed|Japanese wave painting
+Matte Black|builtin|installed|Pure black minimal
+Osaka Jade|builtin|installed|Jade green accent
+Ristretto|builtin|installed|Coffee brown theme
+
+# Convertible Dotfiles (Auto-convert on install)
+HyprDots|convert|https://github.com/prasanthrangan/hyprdots|Feature-rich Hyprland setup
+End_4 Hypr|convert|https://github.com/end-4/dots-hyprland|Modern aesthetic config
+JaKooLit|convert|https://github.com/JaKooLit/Hyprland-Dots|Clean minimal setup
+Yoru Theme|convert|https://github.com/rxyhn/yoru|Beautiful dark aesthetic
+SolDoesTech|convert|https://github.com/SolDoesTech/HyprV4|Beginner-friendly
+ML4W Dotfiles|convert|https://github.com/mylinuxforwork/dotfiles|Professional workflow
+Taylor Hypr|convert|https://github.com/taylor85345/hyprland-dotfiles|Clean modern look
+Axenide Dots|convert|https://github.com/Axenide/Dotfiles|Anime-themed
+Flick0 Setup|convert|https://github.com/flick0/dotfiles|Minimalist elegant
+Dracula Theme|convert|https://github.com/dracula/gtk|Vibrant dark colors
+Solarized|convert|https://github.com/altercation/solarized|Precision colors
+Monokai Pro|convert|https://github.com/phanirithvij/monokai-pro-vscode|Professional scheme
+One Dark|convert|https://github.com/josean-dev/dev-environment-files|Atom's iconic theme
+Palenight|convert|https://github.com/drewtempelmeyer/palenight.vim|Elegant pastel
+Material Ocean|convert|https://github.com/material-ocean/material-ocean|Material Design ocean
+Nightfox|convert|https://github.com/EdenEast/nightfox.nvim|Highly customizable

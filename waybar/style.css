@@ -1,0 +1,126 @@
+@import "../omarchy/current/theme/waybar.css";
+
+* {
+  background-color: @background;
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: CaskaydiaMono Nerd Font;
+  font-size: 12px;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+#tray,
+#cpu,
+#memory,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-omarchy,
+#custom-screenrecording-indicator,
+#custom-update,
+#custom-crypto,
+#custom-weather {
+  min-width: 12px;
+  margin: 0 8px;
+}
+
+#custom-expand-icon {
+  margin-right: 7px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  margin-left: 8.75px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 10px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+/* Ultra minimal workspace design */
+#workspaces button.active {
+  color: #ff6b6b;
+  font-weight: bold;
+  border-bottom: 2px solid #ff6b6b;
+}
+
+#workspaces button.occupied {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+#custom-crypto,
+#custom-weather,
+#network {
+  font-size: 11px;
+}
+
+#cpu,
+#memory,
+#battery {
+  opacity: 0.9;
+}
+
+#battery.warning {
+  color: #ffcb6b;
+}
+
+#battery.critical {
+  color: #f07178;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+#clock {
+  font-weight: bold;
+  font-size: 13px;
+}

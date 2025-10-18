@@ -1,0 +1,12 @@
+# Color schemes - users should download these themselves
+rice-menu/color-schemes/
+
+# Profile saves - user-specific data
+rice-menu/profiles/saved/
+
+# Theme favorites - user-specific
+rice-menu/themes/favorites.txt
+
+# Screenshots - for documentation only
+screenshots/
+take-screenshots.sh
