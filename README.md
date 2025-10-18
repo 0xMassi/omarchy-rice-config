@@ -1,6 +1,6 @@
 # Omarchy Rice Control Center
 
-**Version 0.1.0**
+**Version 0.1.1**
 
 A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprland). Manage themes, wallpapers, fonts, profiles, and system appearance through an intuitive menu interface.
 
@@ -168,27 +168,35 @@ Press **Super+R** to open the Rice Control Center.
 - fd (file finder)
 - Any Nerd Font
 
-## What's New in 0.1.0
+## Changelog
 
-### Font Manager
+### Version 0.1.1 (2025-10-18)
+
+**Bug Fixes:**
+- Fixed btop theme not updating when switching themes - theme generator now creates btop.theme files
+- All generated themes now include proper btop color schemes
+
+### Version 0.1.0 (2025-10-18)
+
+**Font Manager:**
 - Complete system-wide font management
 - Updates all UI components simultaneously
 - Font favorites system
 - Google Fonts integration
 - Terminal font selection
 
-### Wallpaper Manager
+**Wallpaper Manager:**
 - Visual folder browser for image selection
 - Unsplash integration with categories
 - Solid color backgrounds with color picker
 - Add custom images to current theme
 
-### Improved Menus
+**Improved Menus:**
 - Removed emoji clutter from menu options
 - Simplified favorites management
 - Better navigation and organization
 
-### Waybar Integration
+**Waybar Integration:**
 - Working module toggle functionality
 - Automatic reload after changes
 - Module state persistence
@@ -200,7 +208,7 @@ This project follows [Semantic Versioning](https://semver.org/):
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes
 
-Current version: **0.1.0**
+Current version: **0.1.1**
 
 ## License
 

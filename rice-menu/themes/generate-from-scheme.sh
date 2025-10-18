@@ -111,6 +111,116 @@ general {
 }
 EOF
 
+# Generate btop.theme
+echo "→ Generating btop.theme"
+# Extract additional colors for btop
+BLACK=$(grep "^black = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+RED=$(grep "^red = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+GREEN=$(grep "^green = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+YELLOW=$(grep "^yellow = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+BLUE=$(grep "^blue = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+MAGENTA=$(grep "^magenta = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+CYAN=$(grep "^cyan = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+WHITE=$(grep "^white = " "$SCHEME_FILE" | grep -oE '#[0-9a-fA-F]{6}' | head -1)
+
+# Fallbacks for missing colors
+BLACK="${BLACK:-#000000}"
+RED="${RED:-#ff0000}"
+GREEN="${GREEN:-#00ff00}"
+YELLOW="${YELLOW:-#ffff00}"
+BLUE="${BLUE:-#0000ff}"
+MAGENTA="${MAGENTA:-#ff00ff}"
+CYAN="${CYAN:-#00ffff}"
+WHITE="${WHITE:-#ffffff}"
+
+cat > "$OUTPUT_DIR/btop.theme" << EOF
+# btop theme - Generated from $THEME_NAME
+
+# Main background, empty for terminal default, need to be empty if you want transparent background
+theme[main_bg]="$BG_COLOR"
+
+# Main text color
+theme[main_fg]="$FG_COLOR"
+
+# Title color for boxes
+theme[title]="$FG_COLOR"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="$ACCENT_COLOR"
+
+# Background color of selected item in processes box
+theme[selected_bg]="$ACCENT_COLOR"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="$BG_COLOR"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="$BLACK"
+
+# Color of text appearing on top of graphs, i.e uptime and current network graph scaling
+theme[graph_text]="$FG_COLOR"
+
+# Background color of the percentage meters
+theme[meter_bg]="$BLACK"
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="$ACCENT_COLOR"
+
+# CPU, Memory, Network, Proc box outline colors
+theme[cpu_box]="$ACCENT_COLOR"
+theme[mem_box]="$GREEN"
+theme[net_box]="$MAGENTA"
+theme[proc_box]="$BLUE"
+
+# Box divider line and small boxes line color
+theme[div_line]="$BLACK"
+
+# Temperature graph color (Green -> Yellow -> Red)
+theme[temp_start]="$GREEN"
+theme[temp_mid]="$YELLOW"
+theme[temp_end]="$RED"
+
+# CPU graph colors (Teal -> Lavender)
+theme[cpu_start]="$CYAN"
+theme[cpu_mid]="$BLUE"
+theme[cpu_end]="$MAGENTA"
+
+# Mem/Disk free meter (Mauve -> Lavender -> Blue)
+theme[free_start]="$MAGENTA"
+theme[free_mid]="$BLUE"
+theme[free_end]="$CYAN"
+
+# Mem/Disk cached meter (Sapphire -> Lavender)
+theme[cached_start]="$BLUE"
+theme[cached_mid]="$MAGENTA"
+theme[cached_end]="$MAGENTA"
+
+# Mem/Disk available meter (Peach -> Red)
+theme[available_start]="$YELLOW"
+theme[available_mid]="$YELLOW"
+theme[available_end]="$RED"
+
+# Mem/Disk used meter (Green -> Sky)
+theme[used_start]="$GREEN"
+theme[used_mid]="$GREEN"
+theme[used_end]="$CYAN"
+
+# Download graph colors (Peach -> Red)
+theme[download_start]="$YELLOW"
+theme[download_mid]="$YELLOW"
+theme[download_end]="$RED"
+
+# Upload graph colors (Green -> Sky)
+theme[upload_start]="$GREEN"
+theme[upload_mid]="$GREEN"
+theme[upload_end]="$CYAN"
+
+# Process box color gradient for threads, mem and cpu usage (Sapphire -> Mauve)
+theme[process_start]="$BLUE"
+theme[process_mid]="$MAGENTA"
+theme[process_end]="$MAGENTA"
+EOF
+
 # Generate theme.info
 cat > "$OUTPUT_DIR/theme.info" << EOF
 name=$THEME_NAME
