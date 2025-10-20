@@ -5,6 +5,7 @@ OPTIONS=" Edit Hyprland Config
  Edit Waybar Config
  Edit Mako Config
  Edit Fuzzel Config
+ Switch Notification System
  Reload All Services
  System Info
  Backup Everything
@@ -12,7 +13,7 @@ OPTIONS=" Edit Hyprland Config
  Reset to Defaults
  Back to Main Menu"
 
-selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt="⚙️ Advanced: " --lines=10)
+selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt="⚙️ Advanced: " --lines=11)
 
 case "$selected" in
     *"Edit Hyprland Config")
@@ -45,19 +46,31 @@ case "$selected" in
     *"Edit Fuzzel Config")
         FUZZEL_FILES=" fuzzel.ini
  fuzzel.theme.ini"
-        
+
         FILE=$(echo "$FUZZEL_FILES" | fuzzel --dmenu --prompt=" Select File: ")
-        
+
         if [ -n "$FILE" ]; then
             FILE_NAME=$(echo "$FILE" | xargs)
             alacritty -e nvim ~/.config/fuzzel/$FILE_NAME
         fi
         ;;
+    *"Switch Notification System")
+        ~/.config/rice-menu/advanced/switch-notification-daemon.sh
+        ;;
     *"Reload All Services")
         notify-send "Reloading" "Reloading all services..."
         hyprctl reload
         killall waybar; sleep 0.5; waybar &
-        makoctl reload
+
+        # Reload the active notification daemon
+        CURRENT_DAEMON=$(~/.config/rice-menu/advanced/switch-notification-daemon.sh status)
+        if [ "$CURRENT_DAEMON" = "mako" ]; then
+            makoctl reload
+        else
+            swaync-client --reload-config
+            swaync-client --reload-css
+        fi
+
         notify-send "Reload Complete" "All services reloaded"
         ;;
     *"System Info")

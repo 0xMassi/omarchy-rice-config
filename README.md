@@ -1,6 +1,6 @@
 # Omarchy Rice Control Center
 
-**Version 0.1.1**
+**Version 0.1.2**
 
 A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprland). Manage themes, wallpapers, fonts, profiles, and system appearance through an intuitive menu interface.
 
@@ -37,7 +37,9 @@ A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprla
 ### Wallpaper Manager
 - **Browse theme backgrounds**: Navigate through available wallpapers
 - **Folder browser**: Visual file navigator for selecting custom images
-- **Download from Unsplash**: Fetch wallpapers by category
+- **Generate themes from wallpapers**: PyWal-powered color extraction creates complete themes
+- **16-color palette generation**: Extract and apply colors from any image
+- **Wallpaper rotation**: Cycle through current theme backgrounds
 - **Random backgrounds**: Shuffle theme wallpapers
 - **Solid colors**: Color picker for solid backgrounds
 - **Add to theme**: Import custom wallpapers to current theme
@@ -48,11 +50,22 @@ A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprla
 - **Adjust height**: 20-32px options
 - **Live reload**: Automatic restart after changes
 
+### Notifications
+- **Dual notification system support**: Mako (lightweight) and SwayNC (advanced center)
+- **Seamless switching**: Switch between notification daemons with automatic configuration
+- **Daemon-aware menu**: Settings automatically adapt to active notification system
+- **SwayNC keybindings**: Control notification center with keyboard shortcuts
+- **Icon support**: Notifications display with proper icons
+- **Customization options**: Timeout, position, border radius, Do Not Disturb
+- **Test notifications**: Preview different notification types
+
 ### Advanced Settings
+- **Notification system switcher**: Switch between Mako and SwayNC
+- **Service management**: Reload all services with daemon awareness
 - Icons management
 - Color scheme tweaks
-- Notifications customization
-- Appearance settings
+- Direct config editing
+- System information
 
 ## Installation
 
@@ -131,9 +144,40 @@ Press **Super+R** to open the Rice Control Center.
    - **Browse Theme Backgrounds**: Use wallpapers from current theme
    - **Browse Custom Folder**: Navigate filesystem for images
    - **Set Custom Wallpaper**: Quick selection from Pictures/Downloads
-   - **Download from Unsplash**: Fetch wallpapers by category
+   - **Generate Theme from Wallpaper**: Create complete theme from any image (requires PyWal)
+   - **Rotate Current Wallpaper**: Cycle through theme backgrounds
    - **Random Theme Background**: Shuffle current theme wallpapers
    - **Solid Color Background**: Use color picker for solid colors
+
+### Generating Themes from Wallpapers
+1. Open Rice Control → Wallpapers
+2. Select "Generate Theme from Wallpaper"
+3. Choose an image from Pictures or Downloads
+4. Enter a theme name (or leave blank for auto-generated name)
+5. Wait for PyWal to extract colors
+6. Theme is automatically created and activated
+7. All components updated with extracted colors
+
+### Managing Notifications
+1. Open Rice Control → Notifications
+2. View current notification system (Mako or SwayNC)
+3. Options:
+   - **Change Timeout**: Set notification duration
+   - **Change Position**: Move notifications on screen
+   - **Change Border Radius**: Customize notification appearance
+   - **Test Notifications**: Preview different types
+   - **Toggle Do Not Disturb**: Silence notifications
+   - **Edit Config Directly**: Manual configuration
+
+### Switching Notification Systems
+1. Open Rice Control → Advanced
+2. Select "Switch Notification System"
+3. Confirm the switch
+4. System automatically:
+   - Stops current daemon
+   - Starts new daemon
+   - Updates autostart configuration
+   - Saves state for next boot
 
 ### Customizing Waybar
 1. Open Rice Control → Waybar
@@ -159,20 +203,35 @@ Press **Super+R** to open the Rice Control Center.
 - Waybar
 - Alacritty (terminal)
 - Fuzzel (menu launcher)
-- Mako (notification daemon)
+- **Mako or SwayNC** (notification daemon - choose one or both)
 - swaybg (wallpaper)
 - SwayOSD (volume/brightness popups)
 - Hyprlock (lock screen)
 - grim (screenshots)
 - curl, jq, bc (for widgets)
 - fd (file finder)
+- **PyWal** (optional - for wallpaper theme generation: `pip3 install --user pywal`)
 - Any Nerd Font
 
-## What's New in v0.1.1
+## What's New in v0.1.2
 
-**Bug Fixes:**
-- Fixed btop theme not updating when switching themes
-- Theme generator now creates btop.theme files automatically
+**SwayNC Notification Center:**
+- Full SwayNC integration with comprehensive styling
+- Switch between Mako and SwayNC seamlessly
+- Daemon-aware notification settings
+- Complete keybinding support
+
+**Wallpaper Theme Generation:**
+- Generate complete themes from any wallpaper using PyWal
+- 16-color palette extraction
+- Automatic configuration for all components
+- One-click theme creation and activation
+
+**Improvements:**
+- Notification icon support for both daemons
+- Enhanced wallpaper menu with rotation feature
+- Daemon state tracking and automatic configuration
+- Fixed notification icons and CSS specificity issues
 
 [View Full Changelog](CHANGELOG.md)
 
@@ -183,7 +242,7 @@ This project follows [Semantic Versioning](https://semver.org/):
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes
 
-Current version: **0.1.1**
+Current version: **0.1.2**
 
 ## License
 
