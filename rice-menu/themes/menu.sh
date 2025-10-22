@@ -21,13 +21,14 @@ Favorites ($FAVORITES_COUNT)
 Browse by Category
 Browse Theme Backgrounds
 Browse All Themes ($TOTAL_COUNT available!)
+Theme Editor
 Create Custom Theme
 Convert Dotfiles to Theme
 Theme Guide
 Export/Import
 Back to Main Menu"
 
-selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Themes: " --lines=10)
+selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Themes: " --lines=12)
 
 case "$selected" in
     *"Switch Theme"*)
@@ -168,17 +169,20 @@ Cancel"
             fi
         fi
         ;;
+    *"Theme Editor"*)
+        ~/.config/rice-menu/themes/editor.sh
+        ;;
     *"Create Custom Theme"*)
         THEME_NAME=$(echo "" | fuzzel --dmenu --prompt=" New theme name: ")
-        
+
         if [ -n "$THEME_NAME" ]; then
             THEME_NAME=$(echo "$THEME_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
             CUSTOM_DIR="$HOME/.local/share/omarchy/themes/$THEME_NAME"
-            
+
             mkdir -p "$CUSTOM_DIR/backgrounds"
             cp -r ~/.config/omarchy/current/theme/* "$CUSTOM_DIR/" 2>/dev/null
             ln -sf "$CUSTOM_DIR" "$THEME_DIR/$THEME_NAME"
-            
+
             notify-send "✓ Theme Created" "$THEME_NAME created at: $CUSTOM_DIR"
         fi
         ;;
@@ -218,39 +222,43 @@ Total: 27 themes available!"
         notify-send "Theme Guide" "$GUIDE"
         ;;
     *"Export/Import"*)
-        EXPORT_ACTIONS="Export Current Theme
-Import Theme Archive
+        EXPORT_ACTIONS="Import Theme
+Export Current Theme
+Export Specific Theme
+Setup GitHub Gist
 Back"
-        
-        ACTION=$(echo "$EXPORT_ACTIONS" | fuzzel --dmenu --prompt=" Export/Import: ")
+
+        ACTION=$(echo "$EXPORT_ACTIONS" | fuzzel --dmenu --prompt=" Export/Import: " --lines=5)
         
         case "$ACTION" in
-            *"Export"*)
-                EXPORT_NAME=$(echo "" | fuzzel --dmenu --prompt=" Export name: ")
-                if [ -n "$EXPORT_NAME" ]; then
-                    EXPORT_DIR="$HOME/theme-exports"
-                    mkdir -p "$EXPORT_DIR"
-                    tar -czf "$EXPORT_DIR/${EXPORT_NAME}-${CURRENT_THEME}.tar.gz" \
-                        -C ~/.config/omarchy/current/theme .
-                    notify-send "✓ Exported" "Saved to: $EXPORT_DIR/${EXPORT_NAME}-${CURRENT_THEME}.tar.gz"
+            *"Import Theme"*)
+                ~/.config/rice-menu/themes/sharing/import.sh
+                ;;
+            *"Export Current"*)
+                CURRENT_DIR=$(readlink -f ~/.config/omarchy/current/theme)
+                if [ -d "$CURRENT_DIR" ]; then
+                    ~/.config/rice-menu/themes/sharing/export.sh "$CURRENT_DIR"
+                else
+                    notify-send "Error" "Current theme directory not found"
                 fi
                 ;;
-            *"Import"*)
-                ARCHIVES=$(find ~/Downloads ~/theme-exports -name "*.tar.gz" 2>/dev/null | head -10 | sed 's/^/ /')
-                if [ -z "$ARCHIVES" ]; then
-                    notify-send "No Archives" "No .tar.gz found"
+            *"Export Specific"*)
+                THEMES=$(ls -1 "$THEME_DIR" 2>/dev/null)
+                if [ -z "$THEMES" ]; then
+                    notify-send "No Themes" "No themes found to export"
                 else
-                    SELECTED=$(echo "$ARCHIVES" | fuzzel --dmenu --prompt=" Select Archive: ")
-                    if [ -n "$SELECTED" ]; then
-                        ARCHIVE_PATH=$(echo "$SELECTED" | xargs)
-                        THEME_NAME=$(basename "$ARCHIVE_PATH" .tar.gz | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-                        IMPORT_DIR="$HOME/.local/share/omarchy/themes/$THEME_NAME"
-                        mkdir -p "$IMPORT_DIR"
-                        tar -xzf "$ARCHIVE_PATH" -C "$IMPORT_DIR"
-                        ln -sf "$IMPORT_DIR" "$THEME_DIR/$THEME_NAME"
-                        notify-send "✓ Imported" "$THEME_NAME is ready"
+                    THEME=$(echo "$THEMES" | fuzzel --dmenu --prompt=" Select theme to export: " --lines=15)
+                    if [ -n "$THEME" ]; then
+                        THEME_PATH="$THEME_DIR/$THEME"
+                        if [ -L "$THEME_PATH" ]; then
+                            THEME_PATH=$(readlink -f "$THEME_PATH")
+                        fi
+                        ~/.config/rice-menu/themes/sharing/export.sh "$THEME_PATH"
                     fi
                 fi
+                ;;
+            *"Setup GitHub Gist"*)
+                ~/.config/rice-menu/themes/sharing/setup-gist.sh
                 ;;
         esac
         ;;
