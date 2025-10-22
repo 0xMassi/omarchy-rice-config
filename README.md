@@ -1,6 +1,6 @@
 # Omarchy Rice Control Center
 
-**Version 0.1.2**
+**Version 0.2.0**
 
 A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprland). Manage themes, wallpapers, fonts, profiles, and system appearance through an intuitive menu interface.
 
@@ -8,10 +8,15 @@ A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprla
 
 ### Theme Management
 - **461+ themes available**: 17 built-in + 444 color schemes from iTerm2-Color-Schemes
+- **Theme Editor**: Create and customize themes with visual color picker
 - **Live preview**: See color palette before installing
+- **Browse by category**: Organized theme browsing (Dark, Light, Colorful, etc.)
+- **Recently used**: Quick access to your most recent themes
 - **Favorites system**: Quick access to preferred themes
 - **One-click switching**: Change themes instantly
 - **Auto-generation**: Themes created on-demand from color schemes
+- **GTK integration**: Automatic GTK3/GTK4 theme generation and application
+- **Theme sharing**: Export and import themes, upload to GitHub Gist
 
 ### Font Manager
 - **System-wide font changes**: Update all UI components with one click
@@ -58,6 +63,14 @@ A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprla
 - **Icon support**: Notifications display with proper icons
 - **Customization options**: Timeout, position, border radius, Do Not Disturb
 - **Test notifications**: Preview different notification types
+
+### Effects & Visual Customization
+- **Animations**: Control animation speed and style
+- **Blur**: Configure background blur intensity and layers
+- **Opacity**: Adjust transparency for windows and inactive windows
+- **Rounding**: Set window corner radius (0-20px)
+- **Shadows**: Customize drop shadow size, offset, and color
+- **Performance presets**: Quick profiles (Performance, Balanced, Eye Candy)
 
 ### Advanced Settings
 - **Notification system switcher**: Switch between Mako and SwayNC
@@ -213,25 +226,39 @@ Press **Super+R** to open the Rice Control Center.
 - **PyWal** (optional - for wallpaper theme generation: `pip3 install --user pywal`)
 - Any Nerd Font
 
-## What's New in v0.1.2
+## What's New in v0.2.0
 
-**SwayNC Notification Center:**
-- Full SwayNC integration with comprehensive styling
-- Switch between Mako and SwayNC seamlessly
-- Daemon-aware notification settings
-- Complete keybinding support
+**Theme Editor:**
+- Create custom themes from scratch with visual color picker
+- Edit all 16 colors plus background and foreground
+- Auto-generate configs for all components (Alacritty, Kitty, Waybar, Hyprland, etc.)
+- Metadata editor for theme name, author, description, and tags
+- Export themes to shareable archives
 
-**Wallpaper Theme Generation:**
-- Generate complete themes from any wallpaper using PyWal
-- 16-color palette extraction
-- Automatic configuration for all components
-- One-click theme creation and activation
+**Theme Sharing System:**
+- Export themes to .tar.gz archives with all assets
+- Import downloaded themes from community
+- Upload themes to GitHub Gist for easy sharing
+- One-command Gist setup with automatic token management
+- Share theme URLs directly
 
-**Improvements:**
-- Notification icon support for both daemons
-- Enhanced wallpaper menu with rotation feature
-- Daemon state tracking and automatic configuration
-- Fixed notification icons and CSS specificity issues
+**GTK Theme Integration:**
+- Automatic GTK3 and GTK4 theme generation
+- Extracts colors from existing themes
+- Applies on every theme switch
+- Consistent styling across all GTK applications (Nautilus, dialogs, etc.)
+
+**Enhanced Theme Browsing:**
+- Browse themes by category (Dark, Light, Colorful, etc.)
+- Recently used themes for quick access
+- Live color palette preview
+- Better theme organization
+
+**Effects Menu:**
+- Comprehensive visual effects control
+- Animations, blur, opacity, rounding, and shadows
+- Performance presets for different use cases
+- Real-time Hyprland configuration updates
 
 [View Full Changelog](CHANGELOG.md)
 
@@ -242,7 +269,7 @@ This project follows [Semantic Versioning](https://semver.org/):
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes
 
-Current version: **0.1.2**
+Current version: **0.2.0**
 
 ## License
 

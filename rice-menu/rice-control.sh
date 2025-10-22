@@ -4,6 +4,7 @@
 MENU_DIR="$HOME/.config/rice-menu"
 
 OPTIONS="Appearance
+Effects
 Themes
 Profiles
 Fonts
@@ -14,11 +15,14 @@ Waybar
 Notifications
 Advanced"
 
-selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Rice Control: " --lines=10)
+selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Rice Control: " --lines=11)
 
 case "$selected" in
     *Appearance)
         "$MENU_DIR/appearance/menu.sh"
+        ;;
+    *Effects)
+        "$MENU_DIR/effects/menu.sh"
         ;;
     *Themes)
         "$MENU_DIR/themes/menu.sh"
