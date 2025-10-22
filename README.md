@@ -82,6 +82,10 @@ A powerful graphical control center for customizing Omarchy (Arch Linux + Hyprla
 
 ## Installation
 
+### 1a. Install fuzzel
+Hit `Super - Alt - Space` and go to `install`, then `Package`.
+Search for `fuzzel` and install.
+
 ### 1. Clone This Repository
 ```bash
 cd ~
