@@ -16,7 +16,9 @@ FAVORITES_MANAGER="$HOME/.config/rice-menu/themes/favorites.sh"
 FAVORITES_COUNT=$($FAVORITES_MANAGER list 2>/dev/null | wc -l)
 
 OPTIONS="Switch Theme (Current: $CURRENT_THEME)
+Recently Used
 Favorites ($FAVORITES_COUNT)
+Browse by Category
 Browse Theme Backgrounds
 Browse All Themes ($TOTAL_COUNT available!)
 Create Custom Theme
@@ -25,19 +27,14 @@ Theme Guide
 Export/Import
 Back to Main Menu"
 
-selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Themes: " --lines=8)
+selected=$(echo "$OPTIONS" | fuzzel --dmenu --prompt=" Themes: " --lines=10)
 
 case "$selected" in
     *"Switch Theme"*)
-        THEMES=$(ls -1 "$THEME_DIR" | sed 's/^/ /')
-        SELECTED=$(echo "$THEMES" | fuzzel --dmenu --prompt=" Current: $CURRENT_THEME | Select: ")
-
-        if [ -n "$SELECTED" ]; then
-            THEME_NAME=$(echo "$SELECTED" | xargs)
-            notify-send "Switching Theme" "Changing to $THEME_NAME..."
-            omarchy-theme-set "$THEME_NAME"
-            notify-send "Theme Changed" "✓ Switched to $THEME_NAME"
-        fi
+        ~/.config/rice-menu/themes/switch-theme.sh
+        ;;
+    *"Recently Used"*)
+        ~/.config/rice-menu/themes/recently-used.sh
         ;;
     *"Favorites"*)
         FAV_OPTIONS="Switch to Favorite
@@ -82,6 +79,9 @@ Back"
                 fi
                 ;;
         esac
+        ;;
+    *"Browse by Category"*)
+        ~/.config/rice-menu/themes/browse-by-category.sh
         ;;
     *"Browse Theme Backgrounds"*)
         omarchy-theme-bg-next
