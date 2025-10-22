@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2025-10-22
+
+### Added - Theme Editor
+- **Complete theme creation system** - Create custom themes from scratch
+- **Visual color picker** - Edit all 16 terminal colors, background, and foreground
+- **Real-time preview** - See color changes as you edit
+- **Auto-config generation** - Generates configs for Alacritty, Kitty, Hyprland, Waybar, Fuzzel, notifications, btop, and GTK
+- **Metadata editor** - Set theme name, author, description, tags, and version
+- **README generation** - Auto-creates documentation with color palette table
+
+### Added - Theme Sharing System
+- **Export themes** - Package themes as .tar.gz archives with all assets
+- **Import themes** - Install community themes from archives
+- **GitHub Gist integration** - Upload and share themes via Gist
+- **One-command Gist setup** - Automatic GitHub token configuration
+- **Direct URL sharing** - Share downloadable theme links
+- **Theme validation** - Verify theme integrity on import
+
+### Added - GTK Theme Integration
+- **Auto-generate GTK3 themes** - Creates complete GTK3 CSS in ~/.themes
+- **Auto-generate GTK4 themes** - Creates GTK4 CSS in ~/.config/gtk-4.0
+- **Automatic color extraction** - Pulls colors from existing theme files
+- **Dynamic application** - Applies GTK themes on every theme switch
+- **Comprehensive styling** - Full coverage of GTK widgets (windows, buttons, menus, dialogs, etc.)
+- **Fallback generation** - Auto-creates color configs from existing theme files
+- **Testing utility** - Visual GTK theme testing with dialogs
+
+### Added - Enhanced Theme Browsing
+- **Browse by category** - Organized browsing (Dark, Light, Colorful, Pastel, etc.)
+- **Category loop navigation** - Quick cycling through themed categories
+- **Recently used themes** - Access your most recent themes
+- **Live color preview** - View full color palette before applying
+- **Theme actions menu** - Apply or preview from any browser
+
+### Added - Effects Menu
+- **Animations control** - Adjust animation speed and style
+- **Blur settings** - Configure background blur intensity for different layers
+- **Opacity adjustments** - Set transparency for active and inactive windows
+- **Rounding control** - Customize window corner radius (0-20px)
+- **Shadow settings** - Configure drop shadow size, offset, and color
+- **Performance presets** - Quick profiles (Performance, Balanced, Eye Candy)
+
+### Changed
+- **Theme menu** - Reorganized with Theme Editor, Browse by Category, Recently Used, and Sharing options
+- **Main menu** - Added Effects option
+- **Theme generation** - Now includes GTK theme support
+- **Config generation** - Integrated into theme editor workflow
+
+### Technical Details
+- Added theme editor with color picker and metadata management
+- Added theme sharing system with export/import and Gist integration
+- Added GTK3/GTK4 theme generators with automatic application
+- Added effects menu with comprehensive visual customization
+- Added category-based theme browsing
+- Added recently used themes tracking
+- Updated theme generation to include GTK support
+
 ## [0.1.2] - 2025-10-20
 
 ### Added - SwayNC Notification Center
