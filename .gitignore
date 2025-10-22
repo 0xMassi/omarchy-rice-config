@@ -10,3 +10,6 @@ rice-menu/themes/favorites.txt
 # Screenshots - for documentation only
 screenshots/
 take-screenshots.sh
+
+# Development notes and ideas
+ideas.md
