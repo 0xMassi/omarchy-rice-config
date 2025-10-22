@@ -218,4 +218,10 @@ omarchy-theme-set $(basename "$THEME_DIR")
 *Generated with Omarchy Theme Editor*
 EOF
 
-notify-send "✓ Complete" "All configuration files generated successfully"
+# Generate GTK themes
+if [ -f "$COLORS_FILE" ]; then
+    ~/.config/rice-menu/themes/gtk/generate-gtk3.sh "$THEME_DIR" 2>/dev/null || true
+    ~/.config/rice-menu/themes/gtk/generate-gtk4.sh "$THEME_DIR" 2>/dev/null || true
+fi
+
+notify-send "✓ Complete" "All configuration files generated successfully (including GTK themes)"

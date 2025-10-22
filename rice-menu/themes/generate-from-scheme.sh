@@ -241,6 +241,32 @@ colors_fg=$FG_COLOR
 colors_accent=$ACCENT_COLOR
 EOF
 
+# Generate colors.conf for GTK theme generation
+echo "→ Generating colors.conf for GTK themes"
+cat > "$OUTPUT_DIR/colors.conf" << EOF
+# Auto-generated from $SCHEME_FILE
+background="$BG_COLOR"
+foreground="$FG_COLOR"
+
+color0="$BLACK"
+color1="$RED"
+color2="$GREEN"
+color3="$YELLOW"
+color4="$BLUE"
+color5="$MAGENTA"
+color6="$CYAN"
+color7="$WHITE"
+
+color8="$BLACK"
+color9="$RED"
+color10="$GREEN"
+color11="$YELLOW"
+color12="$BLUE"
+color13="$MAGENTA"
+color14="$CYAN"
+color15="$WHITE"
+EOF
+
 echo ""
 echo "✓ Theme generated successfully!"
 echo "Location: $OUTPUT_DIR"
